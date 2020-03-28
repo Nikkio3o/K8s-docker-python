@@ -1,0 +1,15 @@
+Django==1.11.3
+PyMySQL==0.9.3
+uwsgi==2.0.18
+kubernetes==11.0.0
+docker==3.2.1
+docker-pycreds==0.2.2
+gitdb2==2.0.5
+GitPython==2.1.10
+Jinja2==2.10
+celery==4.1.0
+#kombu为celery依赖
+kombu==4.1.0
+flower==0.9.3
+#celery必须这个版本，python就是坑
+redis==2.10.6

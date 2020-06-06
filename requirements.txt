@@ -1,4 +1,4 @@
-Django==1.11.3
+Django==1.11.29
 PyMySQL==0.9.3
 uwsgi==2.0.18
 kubernetes==11.0.0

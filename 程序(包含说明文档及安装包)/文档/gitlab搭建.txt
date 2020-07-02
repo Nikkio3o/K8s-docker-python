@@ -1,0 +1,11 @@
+﻿
+
+gitlab搭建
+https://www.jianshu.com/p/4a5877d1e14b
+
+curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
+
+
+
+卸载gitlab
+sudo gitlab-ctl stop

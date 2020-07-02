@@ -1,0 +1,370 @@
+﻿1、获取当前pod的内存、cpu占用信息
+https://192.168.56.80:6443/apis/metrics.k8s.io/v1beta1/pods
+{
+  "kind": "PodMetricsList",
+  "apiVersion": "metrics.k8s.io/v1beta1",
+  "metadata": {
+    "selfLink": "/apis/metrics.k8s.io/v1beta1/pods"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "metrics-server-766785c44f-rnc64",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/metrics-server-766785c44f-rnc64",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:54:47Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "metrics-server",
+          "usage": {
+            "cpu": "9687436n",
+            "memory": "12492Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "kube-proxy-22cm2",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/kube-proxy-22cm2",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:24:57Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "kube-proxy",
+          "usage": {
+            "cpu": "1090345n",
+            "memory": "10992Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "etcd-master",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/etcd-master",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:24:59Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "etcd",
+          "usage": {
+            "cpu": "54260363n",
+            "memory": "82416Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "kube-proxy-bp8h5",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/kube-proxy-bp8h5",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:24:51Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "kube-proxy",
+          "usage": {
+            "cpu": "5874636n",
+            "memory": "10284Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "coredns-fb8b8dccf-22gbl",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/coredns-fb8b8dccf-22gbl",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:54:45Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "coredns",
+          "usage": {
+            "cpu": "7384458n",
+            "memory": "7912Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "coredns-fb8b8dccf-zg6t2",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/coredns-fb8b8dccf-zg6t2",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:54:42Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "coredns",
+          "usage": {
+            "cpu": "8440062n",
+            "memory": "8008Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "weave-net-ngtgp",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/weave-net-ngtgp",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:24:53Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "weave",
+          "usage": {
+            "cpu": "1458839n",
+            "memory": "24788Ki"
+          }
+        },
+        {
+          "name": "weave-npc",
+          "usage": {
+            "cpu": "2426074n",
+            "memory": "14132Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "weave-net-qm9j6",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/weave-net-qm9j6",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:54:42Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "weave-npc",
+          "usage": {
+            "cpu": "1457920n",
+            "memory": "13916Ki"
+          }
+        },
+        {
+          "name": "weave",
+          "usage": {
+            "cpu": "5254085n",
+            "memory": "22936Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "kube-proxy-725vt",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/kube-proxy-725vt",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:54:44Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "kube-proxy",
+          "usage": {
+            "cpu": "1392908n",
+            "memory": "10460Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "mysql-6c849c6c5b-7ts7l",
+        "namespace": "default",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/default/pods/mysql-6c849c6c5b-7ts7l",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:24:47Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "mysql",
+          "usage": {
+            "cpu": "7873153n",
+            "memory": "264020Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "weave-net-4r9np",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/weave-net-4r9np",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:24:46Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "weave-npc",
+          "usage": {
+            "cpu": "22591n",
+            "memory": "13880Ki"
+          }
+        },
+        {
+          "name": "weave",
+          "usage": {
+            "cpu": "1710386n",
+            "memory": "24520Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "kube-scheduler-master",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/kube-scheduler-master",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:24:54Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "kube-scheduler",
+          "usage": {
+            "cpu": "3078164n",
+            "memory": "10868Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "kube-apiserver-master",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/kube-apiserver-master",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:24:46Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "kube-apiserver",
+          "usage": {
+            "cpu": "77126626n",
+            "memory": "224504Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "tiller-deploy-8568fc486f-lqjbm",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/tiller-deploy-8568fc486f-lqjbm",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:24:59Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "tiller",
+          "usage": {
+            "cpu": "454914n",
+            "memory": "14132Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "kube-controller-manager-master",
+        "namespace": "kube-system",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/pods/kube-controller-manager-master",
+        "creationTimestamp": "2020-05-28T12:54:51Z"
+      },
+      "timestamp": "2020-05-28T12:24:52Z",
+      "window": "30s",
+      "containers": [
+        {
+          "name": "kube-controller-manager",
+          "usage": {
+            "cpu": "28474007n",
+            "memory": "41728Ki"
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+
+2、获取当前集群节点的内存、cpu占用信息
+https://192.168.56.80:6443/apis/metrics.k8s.io/v1beta1/nodes
+{
+  "kind": "NodeMetricsList",
+  "apiVersion": "metrics.k8s.io/v1beta1",
+  "metadata": {
+    "selfLink": "/apis/metrics.k8s.io/v1beta1/nodes"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "master",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/nodes/master",
+        "creationTimestamp": "2020-05-28T13:36:55Z"
+      },
+      "timestamp": "2020-05-28T12:46:52Z",
+      "window": "30s",
+      "usage": {
+        "cpu": "432261949n",
+        "memory": "1048292Ki"
+      }
+    },
+    {
+      "metadata": {
+        "name": "node1",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/nodes/node1",
+        "creationTimestamp": "2020-05-28T13:36:55Z"
+      },
+      "timestamp": "2020-05-28T13:36:44Z",
+      "window": "30s",
+      "usage": {
+        "cpu": "204016946n",
+        "memory": "538224Ki"
+      }
+    },
+    {
+      "metadata": {
+        "name": "node2",
+        "selfLink": "/apis/metrics.k8s.io/v1beta1/nodes/node2",
+        "creationTimestamp": "2020-05-28T13:36:55Z"
+      },
+      "timestamp": "2020-05-28T12:47:00Z",
+      "window": "30s",
+      "usage": {
+        "cpu": "335726894n",
+        "memory": "887340Ki"
+      }
+    }
+  ]
+}

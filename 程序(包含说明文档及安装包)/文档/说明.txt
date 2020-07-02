@@ -1,0 +1,94 @@
+数据库mysql
+用户名：root
+密码：hanghang
+
+
+环境
+python2.7
+需要安装依赖包：
+Django==1.11.3
+PyMySQL==0.9.3
+uwsgi==2.0.18xx
+kubernetes==11.0.0
+docker==3.2.1
+docker-pycreds==0.2.2
+gitdb2==2.0.5
+GitPython==2.1.10
+Jinja2==2.10
+celery==4.1.0
+#kombu为celery依赖
+kombu==4.1.0
+flower==0.9.3
+redis==2.10.6
+
+可以使用如下命令安装
+例如：
+pip install Django==1.11.3 -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+
+python程序启动：
+1.进入程序主目录
+cd deploy
+2.做数据迁移
+python manage.py migrate   
+3.启动服务
+python manage.py runserver 0.0.0.0:8009（后台启动服务：nohup python manage.py runserver 0.0.0.0:8009 &）
+
+
+
+参考：
+MySQL命令行导入数据库：
+3，进入MySQL：mysql -u 用户名 -p ，如我输入的命令行:mysql -u root -p   (输入同样后会让你输入MySQL的密码)
+4，在MySQ中新建你要建的数据库， CREATE DATABASE deploy
+5，输入：mysql>use 目标数据库名，如我输入的命令行:mysql>use deploy
+6，导入文件：mysql>source 导入的文件名;如我输入的命令行：mysql>source database.sql;
+
+
+
+你也可以试试pip install -r requirements.txt https://pypi.tuna.tsinghua.edu.cn/simple
+你也可以试试pip install -r requirements.txt https://pypi.doubanio.com/simple/
+https://pypi.doubanio.com/simple/
+
+helm install stable/mysql --name --set mysql-root-password=hanghang
+
+helm install --name mysql \
+  --set mysqlRootPassword=root,mysqlUser=myname,mysqlPassword=mypsw,mysqlDatabase=mydb,livenessProbe.initialDelaySeconds=300,persistence.size=2Gi,persistence.storageClass=nfs,persistence.accessMode=ReadWriteOnce \
+    stable/mysql
+	
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple -r requirements.txt -I
+
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple
+
+
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple uwsgi==2.0.18
+
+
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+
+docker run -d -v /opt/registry:/var/lib/registry -p 5000:5000 --name myregistry registry:2.7
+
+
+
+docker run -it --entrypoint bash localhost:5000/python2.7:v2
+pip install Django==1.11.3
+
+
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple Django==1.11.3
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple PyMySQL==0.9.3
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple uwsgi==2.0.18xx
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple kubernetes==11.0.0
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple docker==3.2.1
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple docker-pycreds==0.2.2
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple gitdb2==2.0.5
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple GitPython==2.1.10
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple Jinja2==2.10
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple celery==4.1.0
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple kombu==4.1.0
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple flower==0.9.3
+pip install -i http://pypi.douban.com/simple/ --trusted-host=pypi.douban.com/simple redis==2.10.6
+
+os.environ["GIT_PYTHON_REFRESH"] = "quiet"
+
+kubectl create secret docker-registry my-secret --docker-server=localhost:5000 --docker-username=hanghang --docker-password=hanghang --docker-email=hanghang@163.com

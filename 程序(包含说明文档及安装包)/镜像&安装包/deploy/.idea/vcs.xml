@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/deploy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/deploy/temp_project/git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/deploy/temp_project/pro" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/deploy/temp_project/rice" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/deploy/temp_project/su" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/deploy/temp_project/testProject" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/deploy/temp_project/xiang" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/deploy/temp_project/xiyou" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pro" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/repo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/repo/deploy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/repo/deploy/demo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/su" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/test/rice" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/testProject" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/xiang" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/xiyou" vcs="Git" />
+  </component>
+</project>

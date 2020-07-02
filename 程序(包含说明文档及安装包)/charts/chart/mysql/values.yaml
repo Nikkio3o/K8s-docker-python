@@ -1,0 +1,47 @@
+## mysql image version
+## ref: https://hub.docker.com/r/library/mysql/tags/
+##
+image: "mysql"
+imageTag: "5.7.30"
+imagePullPolicy: IfNotPresent
+
+## Persist data to a persistent volume
+persistence:
+  accessMode: ReadWriteOnce
+  size: 8Gi
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
+
+# Custom mysql configuration files path
+#configurationFilesPath: /etc/mysql/conf.d/
+
+# Custom mysql init SQL files used to initialize the database
+initializationFiles: {}
+
+## Configure the service
+## ref: http://kubernetes.io/docs/user-guide/services/
+service:
+  annotations: {}
+  ## Specify a service type
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types
+  type: NodePort
+  port: 3306
+  nodePort: 30001
+  # loadBalancerIP:
+
+## Pods Service Account
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+serviceAccount:
+  create: false
+
+
+
+
+mysqlRootPassword: hanghang
+database: deploy

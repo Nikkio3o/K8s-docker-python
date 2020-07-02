@@ -1,0 +1,181 @@
+集群概况：
+1个master节点+2个work节点
+master 192.168.56.80       2CPU+4G内存
+node1  192.168.56.81	   2CPU+2G内存
+node2  192.168.56.82       2CPU+2G内存
+
+mysql与deploy应用均使用helm chart部署在kubernetes集群中，harbor使用docker-compose进行了部署
+
+1、harbor（docker镜像管理平台）
+http://192.168.56.80:8888/
+用户名： admin
+密码： hanghang
+
+2、应用页面入口
+功能：
+   项目列表
+   上线列表
+   集群列表
+   节点列表
+   服务列表
+部署副本数3个
+http://192.168.56.80:30002/
+
+3、数据库连接信息
+host:192.168.56.81
+端口： 30001
+用户名： root
+密码： hanghang
+
+
+一、kubernetes集群搭建
+硬件配置：每台机器至少2cpu ,2G内存
+1、准备工作
+在master、node1、node2上分别安装docker、kubeadm、kubectl
+  1、机器间配置免密登录
+    https://www.cnblogs.com/xiuyuanpingjie/p/10890703.html
+    1、输入命令ssh-keygen
+    按三次回车，完成生成私钥和公钥，到/root/.ssh目录下可看到刚刚那条命令生成的私钥和公钥
+    2、输入ssh-copy-id 机器2的ip
+    再输入机器2的密码，即可将公钥传给机器2
+    3、机器2的/root/.ssh目录下的authorized_keys文件保存着刚才机器1传过来的公钥（可用cat命令查看，并对比机器1上的公钥，是一样的）
+    4、机器1上直接输入ssh 机器2的ip即可登录机器2，不用再输密码，自此完成了远程免密登录的配置
+  2、安装docker，一键安装脚本可参考：https://blog.csdn.net/fanren224/article/details/72598050
+  3、修改内核参数，否则会造成coredns容器无法启动
+      cat <<EOF >  /etc/sysctl.d/kubernetes.conf
+    net.bridge.bridge-nf-call-ip6tables = 1
+    net.bridge.bridge-nf-call-iptables = 1
+    net.ipv4.ip_forward=1
+    EOF
+	
+  4、关闭swape
+    $ swapoff -a
+    防止开机自动挂载 swap 分区
+    $  sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+  5、禁用selinux，关闭防火墙
+    输入命令vi /etc/selinux/config，将SELINUX=enforcing改为SELINUX=disabled，然后保存退出
+	sudo ufw status命令查看当前防火墙状态;inactive状态是防火墙关闭状态 active是开启状态。
+	使用sudo ufw disable命令来关闭防火墙
+  6、配置hosts如下
+    192.168.56.80 master
+    192.168.56.81 node1
+    192.168.56.82 node2
+    192.168.56.80 reg.hanghang.com
+
+sysctl --system
+
+
+
+2、安装
+  1、在每台机器上都安装docker,docker版本>=18.06
+    一键安装脚本可参考：https://blog.csdn.net/fanren224/article/details/72598050
+  
+  2、在每台机器都安装kubeadm,kubelet,kubectl
+  apt-get install -y kubelet-1.14.2 kubeadm-1.14.2 kubectl-1.14.2 --disableexcludes=kubernetes  #禁用除kubernetes之外的仓库
+  
+  3、初始化master节点
+  kubeadm init --apiserver-advertise-address=192.168.56.80 --pod-network-cidr=10.244.0.0/16
+  
+  4、执行以下三条命令后，才可以使用kubectl命令来操作集群
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  
+  5、添加worker节点
+  kubeadm token create --print-join-command 会生成一条类似于下面的命令，分别在node1，node2上执行，
+  kubeadm join 192.168.56.80:6443 --token glqaor.h956c64827ltiqqr \
+      --discovery-token-ca-cert-hash sha256:7233829dcbc264e89b95ef8f3671a54e42e98acc3c8894176acb3445ad43fed5 
+  
+  6、安装网络插件（在master节点执行）
+  kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+3、卸载
+分别在master、node1、node上执行如下命令
+kubectl drain [node名字，例如master，node1，node2] --delete-local-data --force --ignore-daemonsets
+kubectl delete all --all --all-namespaces --force --grace-period=0
+kubectl delete [node名字，例如master，node1，node2] 
+kubeadm reset
+iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
+
+
+
+二、安装harbor 
+参考链接：https://blog.51cto.com/hexiaoshuai/2473522
+mkdir /data/cert -p
+openssl genrsa -out /data/cert/server.key 2048
+openssl req -x509 -new -nodes -key /data/cert/server.key -subj "/CN=reg.hanghang.com" -days 36500 -out /data/cert/server.crt
+mkdir /etc/docker/certs.d/reg.hanghang.com -p
+cp /data/cert/server.crt /etc/docker/certs.d/reg.hanghang.com
+
+habor修改配置文件重新启动
+https://www.cnblogs.com/yanyanqaq/p/12635705.html
+docker-compose down
+cd /opt/harbor
+./prepare
+docker-compose up -d
+
+三、安装helm（kubernetes包管理器）
+下载helm安装包
+wget https://storage.googleapis.com/kubernetes-helm/helm-v2.12.2-linux-amd64.tar.gz
+
+拷贝helm命令行工具到path路径
+cp helm-v2.12.2-linux-amd64/helm /usr/local/bin/
+
+//安装tiller
+helm init -i gcr.io/kubernetes-helm/tiller:v2.12.2
+
+
+四、部署路径
+程序部署路径：/root/monitor_project/project/deploy
+应用部署方式：
+1、在/root/monitor_project/project/deploy 目录下执行sh build.sh 会自动构建docker镜像并将其推送到habor 镜像仓库，
+如果发现镜像没有推送上去，可以执行如下命令，重启habor,使用ps -ef|grep harbor查看harbor进程
+/root/monitor_project/harbor/harbor &&  docker-compose up -d  然后回到项目目录重新执行sh build.sh
+
+2、使用helm 安装和部署应用
+目录 /root/monitor_project/chart/ 下放了helm chart安装包，若要修改应用配置文件可以vim values.yaml进行修改
+helm install deploy/ --name=deploy
+执行完上面命名后，再执行 kubectl get pod 确保deploy 已经被正常部署并启动
+
+3、访问
+Service 中使用了NodePort的方式对外暴露的端口号为3002，故访问方式为如下
+http://192.168.56.80:30002/
+
+mysql 部署路径
+先为mysql创建一个pv，执行 kubectl create -f kubectl create -f /root/monitor_project/mysql-pv.yaml
+可以同样使用helm安装mysql helm install /root/monitor_project/chart/mysql --name=mysql
+
+
+五、可能会遇到的问题
+1、docker镜像拉不下来，需要配置docker代理上网
+2、使用helm 安装应用时helm chart拉不下来同样是需要配置代理上网，要可以上google
+
+
+git地址
+git@e.coding.net:deploy2/deploy/demo.git
+deploy2
+abcd1234
+项目路径： /root/monitor_project/project
+
+
+
+Docker镜像加速
+1. 安装／升级Docker客户端
+推荐安装1.10.0以上版本的Docker客户端，参考文档 docker-ce
+
+2. 配置镜像加速器
+针对Docker客户端版本大于 1.10.0 的用户
+
+您可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://l7i28x2f.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+
+https://l7i28x2f.mirror.aliyuncs.com
+docker pull qzkc/python2.7:v2

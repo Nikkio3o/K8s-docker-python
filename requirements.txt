@@ -6,7 +6,7 @@ docker==3.2.1
 docker-pycreds==0.2.2
 gitdb2==2.0.5
 GitPython==2.1.10
-Jinja2==2.10
+Jinja2==2.11.3
 celery==4.1.0
 #kombu为celery依赖
 kombu==4.1.0

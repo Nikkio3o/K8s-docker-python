@@ -7,7 +7,7 @@ docker-pycreds==0.2.2
 gitdb2==2.0.5
 GitPython==2.1.10
 Jinja2==2.10
-celery==4.1.0
+celery==5.2.2
 #kombu为celery依赖
 kombu==4.1.0
 flower==0.9.3

@@ -10,6 +10,6 @@ Jinja2==2.10
 celery==4.1.0
 #kombu为celery依赖
 kombu==4.1.0
-flower==0.9.3
+flower==1.2.0
 #celery必须这个版本，python就是坑
 redis==2.10.6
